@@ -18,7 +18,7 @@ export default {
   mounted() {
     setTimeout(() => {
       localStorage.setItem("visited", "true");
-      this.$router.push({ name: RouteNames.Home });
+      this.$router.push({ name: RouteNames.Login });
     }, 5000);
   },
 };
