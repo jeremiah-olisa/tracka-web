@@ -26,7 +26,8 @@ export const authenticateUser = async (email: string, password: string) => {
     
     
     
-    response?.error?.message && toast.error(response.error.message);
+    response?.error?.message && !response?.data && toast.error(response.error.message);
+    response?.error?.message && response?.data && toast.info(response.error.message);
     !response?.error?.message && toast.success("Login successful");
 
     return response;
