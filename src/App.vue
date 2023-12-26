@@ -3,7 +3,9 @@
     <router-link to="/">Home</router-link> |
     <router-link to="/splash">Splash</router-link>
   </div> -->
-  <router-view />
+  <component :is="$route?.meta?.layout || 'div'">
+    <router-view />
+  </component>
 </template>
 
 <script lang="ts">

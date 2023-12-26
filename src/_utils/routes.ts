@@ -1,11 +1,14 @@
 import { createRouter, createWebHistory } from 'vue-router';
+import AuthLayoutVue from '../layout/AuthLayout.vue';
 
-export type PageComponent = typeof import("./../pages/SplashPage.vue");
 
 export interface IRoutes {
     path: string;
     name: string;
-    component: () => Promise<PageComponent>;
+    component: () => any;
+    meta?: {
+        layout: any;
+    }
 }
 
 // Vue.use(VueRouter);
@@ -20,7 +23,7 @@ export enum RouteNames {
     NotFound = 'Not Found',
 }
 
-const routes = [
+const routes: IRoutes[] = [
     {
         path: '/',
         name: RouteNames.Home,
@@ -30,11 +33,17 @@ const routes = [
         path: '/auth/login',
         name: RouteNames.Login,
         component: () => import('./../pages/LoginPage.vue'),
+        meta: {
+            layout: AuthLayoutVue,
+        }
     },
     {
-        path: '/auth/registration',
+        path: '/auth/register',
         name: RouteNames.Registration,
         component: () => import('./../pages/RegistrationPage.vue'),
+        meta: {
+            layout: AuthLayoutVue,
+        }
     },
     {
         path: '/setting',
