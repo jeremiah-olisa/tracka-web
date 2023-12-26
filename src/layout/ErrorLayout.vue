@@ -21,7 +21,7 @@
       @click="navigate"
       class="bg-blue-500 text-white px-4 py-1 rounded-md"
     >
-      {{ hasHistory ? "Go Back" : "Go Home" }}
+      Go Back
     </button>
 
     <!-- Additional Content or Action Buttons can be added here -->
@@ -29,33 +29,15 @@
 </template>
 
 <script lang="ts">
-import { RouteNames } from "./../_utils/routes.ts";
 export default {
   props: {
     errorImage: { type: String, required: true },
     error: { type: String, required: true },
     errorDescription: { type: String, required: true },
   },
-  data() {
-    return {
-      hasHistory: false,
-    };
-  },
-  mounted() {
-    hasHistory = hasHistory();
-  },
   methods: {
-    hasHistory() {
-      return this.$router && this.$router.history.length > 1;
-    },
     navigate() {
-      if (this.hasHistory()) {
-        // Go back in the browser history
-        this.$router.go(-1);
-      } else {
-        // Navigate to the home page or another default route
-        this.$router.push({ name: RouteNames.Home }); // Replace "home" with your default route name
-      }
+      this.$router.go(-1);
     },
   },
 };
