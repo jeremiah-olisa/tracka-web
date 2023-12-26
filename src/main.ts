@@ -20,6 +20,11 @@ import { faSpinner, faHome, faAdd, faBell, faChartBar, faCog } from '@fortawesom
 library.add(faSpinner, faHome, faAdd, faBell, faChartBar, faCog)
 
 
+import Toast, { POSITION } from "vue-toastification";
+// Import the CSS or use your own!
+import "vue-toastification/dist/index.css";
+
+
 // Vue.config.productionTip = false
 
 
@@ -28,8 +33,12 @@ const vuetify = createVuetify({
     directives,
 })
 
-createApp(App)
+const app = createApp(App)
     .component('font-awesome-icon', FontAwesomeIcon)
     .use(vuetify)
     .use(router)
-    .mount('#app');
+    .use(Toast, { position: POSITION.TOP_RIGHT });
+
+// app.config.globalProperties.$supabase = supabase;
+
+app.mount('#app');

@@ -24,8 +24,8 @@
           name="pin"
           inputmode="numeric"
           pattern="[0-9]*"
-          min="1111"
-          max="9999"
+          min="99999"
+          max="999999"
           style="-webkit-text-security: disc"
           autofocus
           class="w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline"
@@ -55,8 +55,14 @@
 <script setup lang="ts">
 import { Form, Field, ErrorMessage } from "vee-validate";
 import { authValidationSchema } from "./../_utils/validations/auth.validation";
+import { createUser } from "./../_utils/lib/authentication";
+import { useRouter } from "vue-router";
+import { RouteNames } from "../_utils/routes";
 
-const onSubmit = (values: Record<string, any>) => {
-  console.log(values);
+const router = useRouter();
+const onSubmit = async (values: Record<string, any>) => {
+  const response = await createUser(values?.email, values?.pin);
+
+  if (response.data) router.push({ name: RouteNames.Login });
 };
 </script>
