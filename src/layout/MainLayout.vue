@@ -5,14 +5,6 @@
       <v-toolbar-title class="ml-6">TRACKA</v-toolbar-title>
     </v-app-bar>
 
-    <!-- Drawer -->
-    <v-navigation-drawer app v-model="drawer">
-      <!-- Drawer Content -->
-      <v-list>
-        <!-- Your drawer content goes here -->
-      </v-list>
-    </v-navigation-drawer>
-
     <!-- Main Content -->
     <v-main>
       <!-- Body Content -->
