@@ -1,4 +1,4 @@
-const viteConfig = {
+module.exports = {
   pwa: {
     name: "Tracka",
     themeColor: "#fffff",
@@ -7,6 +7,3 @@ const viteConfig = {
     appleMobileWebAppStatusBarStyle: "black",
   },
 };
-
-
-export default viteConfig;
