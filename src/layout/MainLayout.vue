@@ -16,7 +16,9 @@
     <!-- Main Content -->
     <v-main>
       <!-- Body Content -->
-      <slot></slot>
+      <v-container>
+        <slot></slot>
+      </v-container>
     </v-main>
 
     <!-- Bottom Navigation -->

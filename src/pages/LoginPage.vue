@@ -1,38 +1,38 @@
 <template>
   <slot>
-    <form @submit.prevent="login">
+    <Form @submit="onSubmit" :validation-schema="authValidationSchema">
       <div class="mb-4">
         <label for="email" class="block text-gray-700 text-sm font-bold mb-2"
           >Email</label
         >
-        <input
-          type="email"
-          id="email"
-          v-model="email"
+        <Field
+          name="email"
           class="w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline"
           placeholder="Enter your email"
           required
         />
+        <ErrorMessage name="email" class="text-red-500 text-sm mt-1" />
       </div>
 
       <div class="mb-6">
         <label for="pin" class="block text-gray-700 text-sm font-bold mb-2"
-          >PIN</label
+          >Pin</label
         >
-        <input
+        <Field
           type="password"
           id="pin"
+          name="pin"
           inputmode="numeric"
           pattern="[0-9]*"
           min="1111"
           max="9999"
           style="-webkit-text-security: disc"
           autofocus
-          v-model="pin"
           class="w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline"
           placeholder="Enter your PIN"
           required
         />
+        <ErrorMessage name="pin" class="text-red-500 text-sm mt-1" />
       </div>
 
       <!-- Login Button -->
@@ -42,7 +42,7 @@
       >
         Login
       </button>
-    </form>
+    </Form>
   </slot>
 
   <slot name="meta">
@@ -50,31 +50,19 @@
     <div class="mt-4 text-sm text-gray-600">
       <!-- Add any additional information or links here -->
       Don't have an account?
-      <router-link class="text-blue-600" to="/auth/register">Register</router-link> now
+      <router-link class="text-blue-600" to="/auth/register"
+        >Register</router-link
+      >
+      now
     </div>
   </slot>
 </template>
 
-<script lang="ts">
-import { RouteNames } from "../_utils/routes";
+<script setup lang="ts">
+import { Form, Field, ErrorMessage } from "vee-validate";
+import { authValidationSchema } from "./../_utils/validations/auth.validation";
 
-export default {
-  data() {
-    return {
-      email: "",
-      pin: "",
-    };
-  },
-  methods: {
-    login() {
-      // Add your login logic here
-      console.log("Logging in with:", this.email, this.pin);
-      this.$router.push({ name: RouteNames.Home });
-    },
-  },
+const onSubmit = (values: Record<string, any>) => {
+  console.log(values);
 };
 </script>
-
-<style scoped>
-/* Add any component-specific styles here */
-</style>
