@@ -15,9 +15,9 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 /* import font awesome icon component */
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 /* import specific icons */
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { faSpinner, faHome, faAdd, faBell, faChartBar, faCog } from '@fortawesome/free-solid-svg-icons'
 /* add icons to the library */
-library.add(faSpinner)
+library.add(faSpinner, faHome, faAdd, faBell, faChartBar, faCog)
 
 
 // Vue.config.productionTip = false

@@ -11,9 +11,6 @@
 <script lang="ts">
 import { RouteNames } from "./_utils/routes";
 
-// import Splash from "./pages/SplashPage.vue";
-// import Home from "./pages/HomePage.vue";
-
 export default {
   mounted() {
     // Check if it's the first visit

@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router';
-import AuthLayoutVue from '../layout/AuthLayout.vue';
+import AuthLayout from '../layout/AuthLayout.vue';
+import MainLayout from '../layout/MainLayout.vue'
 
 
 export interface IRoutes {
@@ -28,13 +29,16 @@ const routes: IRoutes[] = [
         path: '/',
         name: RouteNames.Home,
         component: () => import('./../pages/HomePage.vue'),
+        meta: {
+            layout: MainLayout
+        }
     },
     {
         path: '/auth/login',
         name: RouteNames.Login,
         component: () => import('./../pages/LoginPage.vue'),
         meta: {
-            layout: AuthLayoutVue,
+            layout: AuthLayout,
         }
     },
     {
@@ -42,18 +46,24 @@ const routes: IRoutes[] = [
         name: RouteNames.Registration,
         component: () => import('./../pages/RegistrationPage.vue'),
         meta: {
-            layout: AuthLayoutVue,
+            layout: AuthLayout,
         }
     },
     {
         path: '/setting',
         name: RouteNames.Setting,
         component: () => import('./../pages/SettingPage.vue'),
+        meta: {
+            layout: MainLayout
+        }
     },
     {
         path: '/splash',
         name: RouteNames.Splash,
         component: () => import('./../pages/SplashPage.vue'),
+        meta: {
+            layout: MainLayout
+        }
     },
     {
         path: '/transaction',
