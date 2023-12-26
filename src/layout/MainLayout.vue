@@ -40,7 +40,9 @@ export default {
     return {};
   },
   methods: {
-    onTabChange(index) {},
+    onTabChange(index: number) {
+      return index;
+    },
   },
 };
 </script>
