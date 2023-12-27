@@ -1,8 +1,11 @@
 <template>
   <v-app>
     <!-- App Bar -->
-    <v-app-bar app :elevation="0" color="#2C457B">
-      <v-toolbar-title class="ml-6">TRACKA</v-toolbar-title>
+    <v-app-bar app :elevation="0">
+      <!-- <v-toolbar-title class="ml-6">TRACKA</v-toolbar-title> -->
+      <v-container>
+        <Header />
+      </v-container>
     </v-app-bar>
 
     <!-- Main Content -->
@@ -33,6 +36,9 @@
     </v-bottom-navigation>
   </v-app>
 </template>
+<script setup lang="ts">
+import Header from "../components/App/Header.vue";
+</script>
 
 <script lang="ts">
 export default {

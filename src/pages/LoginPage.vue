@@ -1,6 +1,6 @@
 <template>
   <slot>
-    <Form @submit="onSubmit" :validation-schema="authValidationSchema">
+    <Form @submit="onSubmit" :validation-schema="loginValidationSchema">
       <div class="mb-4">
         <label for="email" class="block text-gray-700 text-sm font-bold mb-2"
           >Email</label
@@ -60,15 +60,18 @@
 
 <script setup lang="ts">
 import { Form, Field, ErrorMessage } from "vee-validate";
-import { authValidationSchema } from "./../_utils/validations/auth.validation";
+import { loginValidationSchema } from "./../_utils/validations/auth.validation";
 import { authenticateUser } from "./../_utils/lib/authentication";
 import { useRouter } from "vue-router";
 import { RouteNames } from "../_utils/routes";
+import store from "../_utils/lib/store";
 
 const router = useRouter();
 const onSubmit = async (values: Record<string, any>) => {
   const response = await authenticateUser(values?.email, values?.pin);
 
-  if (response.data) router.push({ name: RouteNames.Home });
+  
+  response?.session && store.setSession(response?.session);
+  response?.session && router.push({ name: RouteNames.Home });
 };
 </script>

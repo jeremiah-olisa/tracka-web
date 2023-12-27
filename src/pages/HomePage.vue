@@ -1,51 +1,22 @@
 <template>
   <slot>
-    <div class="w-full p-6 bg-white rounded-md shadow-md">
-      <!-- User Profile Section -->
-      <div class="flex items-center">
-        <!-- User Profile Image (Assuming you have an 'imageUrl' prop) -->
-        <div class="w-1/12">
-          <img
-            :src="imageUrl"
-            alt="User Profile"
-            class="w-12 h-12 rounded-full mr-4"
-          />
-        </div>
-
-        <!-- User Name -->
-        <div class="w-3/12">
-          <div class="text-lg font-semibold">{{ firstName }}</div>
-          <div class="text-gray-500">{{ lastName }}</div>
-        </div>
-
-        <!-- Month Select Dropdown -->
-        <div class="mt-6 w-8/12">
-          <label
-            for="monthSelect"
-            class="block text-sm font-medium text-gray-700"
-          >
-            Select Month
-          </label>
-          <select
-            v-model="selectedMonth"
-            id="monthSelect"
-            name="monthSelect"
-            class="mt-1 block w-full p-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:border-blue-500"
-          >
-            <!-- Option for Current Month (Assuming you have an array of months) -->
-            <option
-              v-for="(month, index) in months"
-              :key="index"
-              :value="month"
-            >
-              {{ month }}
-            </option>
-          </select>
-        </div>
-      </div>
-    </div>
+    <CardBalance />
+    <AccountList />
+    <DashboardCTA />
+    <SectionHeader />
+    <TransactionMonth />
+    <TransactionItem />
   </slot>
 </template>
+
+<script setup lang="ts">
+import CardBalance from "../components/Home/CardBalance.vue";
+import AccountList from "../components/Home/AccountList.vue";
+import DashboardCTA from "../components/Home/DashboardCTA.vue";
+import SectionHeader from "../components/Home/SectionHeader.vue";
+import TransactionMonth from "../components/Home/TransactionMonth.vue";
+import TransactionItem from "../components/Home/TransactionItem.vue";
+</script>
 
 <script lang="ts">
 export default {

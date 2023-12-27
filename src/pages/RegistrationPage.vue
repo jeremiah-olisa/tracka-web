@@ -1,6 +1,19 @@
 <template>
   <slot>
-    <Form @submit="onSubmit" :validation-schema="authValidationSchema">
+    <Form @submit="onSubmit" :validation-schema="registerValidationSchema">
+      <div class="mb-4">
+        <label for="fullName" class="block text-gray-700 text-sm font-bold mb-2"
+          >Full Name</label
+        >
+        <Field
+          name="fullName"
+          class="w-full px-3 py-2 border rounded-md focus:outline-none focus:shadow-outline"
+          placeholder="Enter your name"
+          required
+        />
+        <ErrorMessage name="fullName" class="text-red-500 text-sm mt-1" />
+      </div>
+      
       <div class="mb-4">
         <label for="email" class="block text-gray-700 text-sm font-bold mb-2"
           >Email</label
@@ -54,14 +67,14 @@
 
 <script setup lang="ts">
 import { Form, Field, ErrorMessage } from "vee-validate";
-import { authValidationSchema } from "./../_utils/validations/auth.validation";
+import { registerValidationSchema } from "./../_utils/validations/auth.validation";
 import { createUser } from "./../_utils/lib/authentication";
 import { useRouter } from "vue-router";
 import { RouteNames } from "../_utils/routes";
 
 const router = useRouter();
 const onSubmit = async (values: Record<string, any>) => {
-  const response = await createUser(values?.email, values?.pin);
+  const response = await createUser(values?.email, values?.pin, values?.fullName);
 
   if (response.data) router.push({ name: RouteNames.Login });
 };
