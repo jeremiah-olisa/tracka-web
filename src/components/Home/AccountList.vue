@@ -5,12 +5,7 @@
         <div class="font-medium text-base">
           Your Accounts
         </div>
-        <div class="flex flex-row items-center gap-x-1 bg-blue-100 rounded-full px-4">
-          <Icon icon="/icons/outline-plus.svg" color="#FF0000" size="20px" />
-          <div class="font-medium text-base">
-            Add New
-          </div>
-        </div>
+        <AddAccountModal />
       </div>
       <div class="flex flex-col gap-4">
         <AccountListItem />
@@ -22,6 +17,6 @@
 </template>
 
 <script setup lang="ts">
-import Icon from "./../icons/Icon.vue";
 import AccountListItem from "./AccountListItem.vue";
+import AddAccountModal from "./Account/AddAccountModal.vue";
 </script>

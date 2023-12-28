@@ -3,7 +3,8 @@ export enum AccountCategory {
     Bussiness = "Bussiness",
     Personal = "Personal",
     Education = "Education",
-    Gift = "Gift"
+    Gift = "Gift",
+    Others = "Others"
 }
 
 export enum TransactionType {
@@ -18,6 +19,7 @@ export interface Account {
     category: AccountCategory
     createdAt: Date,
     updatedAt: Date,
+    balance: number
 }
 
 
