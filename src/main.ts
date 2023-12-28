@@ -1,44 +1,31 @@
-import './style.css'
-import App from './App.vue'
+import './assets/main.css'
+
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 
-// Vuetify
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-import router from './_utils/routes'
-
-
-/* import the fontawesome core */
-import { library } from '@fortawesome/fontawesome-svg-core'
-/* import font awesome icon component */
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-/* import specific icons */
-import { faSpinner, faHome, faAdd, faBell, faChartBar, faCog } from '@fortawesome/free-solid-svg-icons'
-/* add icons to the library */
-library.add(faSpinner, faHome, faAdd, faBell, faChartBar, faCog)
-
+import App from './App.vue'
+import router from './utils/router'
 
 import Toast, { POSITION } from "vue-toastification";
 // Import the CSS or use your own!
 import "vue-toastification/dist/index.css";
 
-
-// Vue.config.productionTip = false
-
-
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import { VApp, VBottomNavigation, VAppBar, VContainer, VMain } from 'vuetify/components'
+import { Scroll, Resize, Ripple, Touch, ClickOutside, } from 'vuetify/directives'
 const vuetify = createVuetify({
-    components,
-    directives,
+    components: { VApp, VBottomNavigation, VAppBar, VContainer, VMain },
+    directives: { Scroll, Resize, Ripple, Touch, ClickOutside, },
 })
 
+// Vue.config.productionTip = false
 const app = createApp(App)
-    .component('font-awesome-icon', FontAwesomeIcon)
-    .use(vuetify)
+    .use(createPinia())
     .use(router)
+    .use(vuetify)
     .use(Toast, { position: POSITION.TOP_RIGHT });
 
-// app.config.globalProperties.$supabase = supabase;
 
-app.mount('#app');
+app.mount('#app')
