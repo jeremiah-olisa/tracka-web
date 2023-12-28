@@ -20,9 +20,20 @@ export enum RouteNames {
   Splash = 'Splash',
   Transaction = 'Transaction',
   NotFound = 'Not Found',
+  OnBoarding = "On Boarding"
 }
 
 const routes: IRoutes[] = [
+  {
+    path: '/splash',
+    name: RouteNames.Splash,
+    component: () => import('./../../screens/SplashScreen.vue'),
+  },
+  {
+    path: '/onboarding',
+    name: RouteNames.OnBoarding,
+    component: () => import('./../../screens/onboarding/OnBoarding.vue'),
+  },
   {
     path: '/',
     name: RouteNames.Home,
@@ -31,18 +42,18 @@ const routes: IRoutes[] = [
     //   layout: MainLayout
     // }
   },
+  {
+    path: '/auth/register',
+    name: RouteNames.Registration,
+    component: () => import('./../../screens/auth/RegisterScreen.vue'),
+    // meta: {
+    //   layout: AuthLayout,
+    // }
+  },
   // {
   //   path: '/auth/login',
   //   name: RouteNames.Login,
   //   component: () => import('./../pages/LoginPage.vue'),
-  //   meta: {
-  //     layout: AuthLayout,
-  //   }
-  // },
-  // {
-  //   path: '/auth/register',
-  //   name: RouteNames.Registration,
-  //   component: () => import('./../pages/RegistrationPage.vue'),
   //   meta: {
   //     layout: AuthLayout,
   //   }
