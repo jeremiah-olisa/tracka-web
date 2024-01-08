@@ -15,6 +15,7 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import { VApp, VBottomNavigation, VAppBar, VContainer, VMain } from 'vuetify/components'
 import { Scroll, Resize, Ripple, Touch, ClickOutside, } from 'vuetify/directives'
+
 const vuetify = createVuetify({
     components: { VApp, VBottomNavigation, VAppBar, VContainer, VMain },
     directives: { Scroll, Resize, Ripple, Touch, ClickOutside, },
