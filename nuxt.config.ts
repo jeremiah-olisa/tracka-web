@@ -13,5 +13,6 @@ export default defineNuxtConfig({
     componentDir: './components/ui'
   },
   devtools: { enabled: true },
-  spaLoadingTemplate: 'components/Loading/index.vue',
+  ssr: false,
+  spaLoadingTemplate: 'spa-loading-template.html',
 })

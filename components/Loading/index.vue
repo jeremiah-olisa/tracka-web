@@ -1,9 +1,18 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+</script>
+
+<!-- components/Loading/index.vue -->
 
 <template>
-  <div>
-    Component: Loading
+
+  <div class="loading">
+    <!-- Your custom loading indicator here -->
+    <span>Loading...</span>
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+.loading {
+  @apply flex content-center items-center h-screen;
+}
+</style>
