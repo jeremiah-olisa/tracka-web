@@ -15,4 +15,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   spaLoadingTemplate: 'spa-loading-template.html',
+  app: {
+    head: {
+      link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.png' }]
+    }
+  }
 })
