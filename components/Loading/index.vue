@@ -1,10 +1,8 @@
-<script lang="ts" setup>
-</script>
+<script lang="ts" setup></script>
 
 <!-- components/Loading/index.vue -->
 
 <template>
-
   <div class="loading">
     <!-- Your custom loading indicator here -->
     <span>Loading...</span>
