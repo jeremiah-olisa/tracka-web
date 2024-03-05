@@ -1,0 +1,96 @@
+// https://documenter.getpostman.com/view/32066755/2s9YynjNr9#4a3e7243-84a2-43e6-860b-f4dabebdf4ab
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+generator erd {
+    provider                  = "prisma-erd-generator"
+    output                    = "./ERD.svg"
+    includeRelationFromFields = true
+    disableEmoji              = false
+}
+
+generator markdown {
+    provider = "prisma-markdown"
+    output   = "./ERD.md"
+    title    = "MonieTracker"
+}
+
+generator client {
+    provider = "prisma-client-js"
+}
+
+model User {
+    id              Int            @id @default(autoincrement())
+    userKey         String         @unique @default(cuid())
+    email           String         @unique
+    fullName        String         @unique
+    emailVerifiedAt DateTime?
+    userPin         UserPin?
+    createdAt       DateTime       @default(now())
+    updatedAt       DateTime       @updatedAt
+    accounts        UserAccounts[]
+}
+
+model UserPin {
+    id        Int      @id @default(autoincrement())
+    userId    Int      @unique
+    pin       String
+    user      User     @relation(fields: [userId], references: [id])
+    createdAt DateTime @default(now())
+    updatedAt DateTime @updatedAt
+}
+
+model UserAccounts {
+    id            Int      @id @default(autoincrement())
+    userId        Int
+    bankName      String   @db.VarChar(60)
+    accountName   String   @db.VarChar(60)
+    accountNumber String   @db.VarChar(17)
+    accountKey    String   @unique @default(cuid())
+    currency      String
+    meta          String
+    balance       Decimal
+    user          User     @relation(fields: [userId], references: [id])
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+    budgets       Budget[]
+}
+
+model Budget {
+    id            Int             @id @default(autoincrement())
+    frequency     BudgetFrequency
+    name          String
+    startDate     DateTime
+    endDate       DateTime?
+    userAccountId Int
+    total         Decimal
+    spent         Decimal?
+    budgetKey     String          @unique @default(cuid())
+    createdAt     DateTime        @default(now())
+    updatedAt     DateTime        @updatedAt
+    userAccount   UserAccounts    @relation(fields: [userAccountId], references: [id])
+    budgetItems   BudgetItem[]
+}
+
+model BudgetItem {
+    id            Int      @id @default(autoincrement())
+    name          String
+    category      String
+    budgetId      Int
+    total         Decimal
+    spent         Decimal?
+    budgetItemKey String   @unique @default(cuid())
+    budget        Budget   @relation(fields: [budgetId], references: [id])
+    createdAt     DateTime @default(now())
+    updatedAt     DateTime @updatedAt
+}
+
+enum BudgetFrequency {
+    Monthly
+    Annually
+    Weekly
+    BiAnnually
+    Quarterly
+}
