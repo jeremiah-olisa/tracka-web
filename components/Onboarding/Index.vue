@@ -2,6 +2,7 @@
 import OnboardingIllustrationOne from "./Illustration/One.vue";
 import OnboardingIllustrationTwo from "./Illustration/Two.vue";
 import OnboardingIllustrationThree from "./Illustration/Three.vue";
+import { useLocalStorage } from "@vueuse/core";
 
 type Screens = keyof typeof onboardingContent;
 
@@ -28,6 +29,8 @@ const onboardingContent = {
   },
 };
 
+const onboardedAt = useLocalStorage<number | undefined>('onboardedAt', undefined);
+
 const onboardingContentLength = Object.keys(onboardingContent).length;
 
 const nextScreen = (screen?: number) => {
@@ -46,9 +49,8 @@ const nextScreen = (screen?: number) => {
 };
 
 const skip = () => {
-  localStorage.setItem('onboardedAt', Date.now().toString());
-  alert('skip')
-  // navigateTo("/auth/login", { replace: true });
+  onboardedAt.value = Date.now();
+  navigateTo("/auth/login", { replace: true });
 };
 </script>
 
@@ -87,11 +89,11 @@ const skip = () => {
             @click="nextScreen(index)"
             class="w-3 h-3 rounded-full"
             :class="{
-              'bg-primary': onboardingScreen === index,
-              'bg-slate-400': onboardingScreen !== index,
-              'h-6': onboardingScreen === index,
-              'h-4': onboardingScreen !== index,
-            }"
+            'bg-primary': onboardingScreen === index,
+            'bg-slate-400': onboardingScreen !== index,
+            'h-6': onboardingScreen === index,
+            'h-4': onboardingScreen !== index,
+          }"
           ></button>
         </div>
         <div class="flex justify-center items-center">
