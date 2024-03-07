@@ -29,7 +29,10 @@ const onboardingContent = {
   },
 };
 
-const onboardedAt = useLocalStorage<number | undefined>('onboardedAt', undefined);
+const onboardedAt = useLocalStorage<number | undefined>(
+  "onboardedAt",
+  undefined,
+);
 
 const onboardingContentLength = Object.keys(onboardingContent).length;
 
@@ -55,7 +58,7 @@ const skip = () => {
 </script>
 
 <template>
-  <div class="bg-background flex flex-col h-screen items-center p-5">
+  <div class="bg-primary-57 flex flex-col h-screen items-center p-5">
     <div class="max-w-[380px] lg:max-w-lg md:max-w-md">
       <div class="flex h-[2vh] items-baseline flex-row-reverse">
         <Button
@@ -89,11 +92,11 @@ const skip = () => {
             @click="nextScreen(index)"
             class="w-3 h-3 rounded-full"
             :class="{
-            'bg-primary': onboardingScreen === index,
-            'bg-slate-400': onboardingScreen !== index,
-            'h-6': onboardingScreen === index,
-            'h-4': onboardingScreen !== index,
-          }"
+              'bg-primary': onboardingScreen === index,
+              'bg-slate-400': onboardingScreen !== index,
+              'h-6': onboardingScreen === index,
+              'h-4': onboardingScreen !== index,
+            }"
           ></button>
         </div>
         <div class="flex justify-center items-center">

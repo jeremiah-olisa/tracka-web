@@ -15,10 +15,15 @@ module.exports = {
     },
     extend: {
       colors: {
+        header: "hsl(var(--header))",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
+        "primary-57": {
+          DEFAULT: "hsl(var(--primary-57))",
+          foreground: "hsl(var(--foreground))",
+        },
         foreground: "hsl(var(--foreground))",
         primary: {
           DEFAULT: "hsl(var(--primary))",

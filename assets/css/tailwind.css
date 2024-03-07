@@ -4,8 +4,10 @@
 
 @layer base {
   :root {
-    --background: 247, 84%, 57%;
-    --foreground: 247, 84%, 3.9%;
+    --background: 228, 100%, 98%;
+    --foreground: 0, 0%, 7%;
+
+    --header: 259, 69%, 19%;
 
     --muted: 0 0% 96.1%;
     --muted-foreground: 0 0% 45.1%;
@@ -18,6 +20,8 @@
 
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
+
+    --primary-57: 247, 83%, 57%;
 
     --primary: 247, 83%, 47%;
     --primary-foreground: 0 0% 98%;
@@ -73,6 +77,10 @@
     @apply border-border;
   }
   body {
-    /* @apply bg-background text-foreground; */
+    @apply bg-background text-foreground font-[Inter];
   }
+}
+
+.app-container {
+  @apply w-[380px] lg:w-[512px] md:w-[448px];
 }
