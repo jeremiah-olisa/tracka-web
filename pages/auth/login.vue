@@ -73,10 +73,3 @@ const { onSubmit, formFields, showPassword, toggleShowPassword } =
     </p>
   </form>
 </template>
-
-<style scoped>
-.auth-header-text {
-  @apply text-2xl text-header font-bold font-[Inter];
-  font-style: normal;
-}
-</style>

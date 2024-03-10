@@ -4,35 +4,40 @@ import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 import { STRONG_PASSWORD_REGEXP } from "~/lib/constants";
 
-export const loginFormValidationSchema = toTypedSchema(
-  z.object({
-    email: z.string().min(2).max(60).email(),
-    password: z
-      .string()
-      .min(8)
-      .max(30)
-      .regex(
-        STRONG_PASSWORD_REGEXP,
-        "Your password must contain at least one Upper case, one lower case and a number e.g Passw0rd",
-      ),
-  }),
+export const resetPasswordFormValidationSchema = toTypedSchema(
+  z
+    .object({
+      password: z
+        .string()
+        .min(8)
+        .max(30)
+        .regex(
+          STRONG_PASSWORD_REGEXP,
+          "Your password must contain at least one Upper case, one lower case and a number e.g Passw0rd",
+        ),
+      confirmPassword: z.string(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: "Passwords don't match",
+      path: ["confirmPassword"],
+    }),
 );
 
-export const useLoginForm = () => {
+export const useResetPasswordForm = () => {
   const showPassword = ref(false);
 
   const formFields = computed(() => {
     return [
       {
-        name: "email",
-        label: "Email",
-        placeholder: "johndoe@mail.com",
-        type: "email",
-      },
-      {
         name: "password",
         label: "Password",
         placeholder: "Password",
+        type: showPassword.value ? "text" : "password",
+      },
+      {
+        name: "confirmPassword",
+        label: "Confirm Password",
+        placeholder: "Confirm Password",
         type: showPassword.value ? "text" : "password",
       },
     ];
@@ -52,5 +57,5 @@ export const useLoginForm = () => {
     return navigateTo(routes.home, { replace: true });
   });
 
-  return { onSubmit, formFields, showPassword, toggleShowPassword };
+  return { onSubmit, formFields, toggleShowPassword, showPassword };
 };

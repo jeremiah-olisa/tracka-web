@@ -84,3 +84,20 @@
 .app-container {
   @apply w-[380px] lg:w-[512px] md:w-[448px];
 }
+
+.auth-header-text {
+  @apply text-2xl text-header font-bold font-[Inter];
+  font-style: normal;
+}
+
+.onboarding-desc-text {
+  @apply font-normal text-sm leading-5 text-center font-[#292b2d];
+  font-family: "Inter";
+  font-style: normal;
+}
+
+.onboarding-header-text {
+  @apply font-medium text-xl leading-8 text-[#240F51] text-center;
+  font-family: "Inter";
+  font-style: normal;
+}

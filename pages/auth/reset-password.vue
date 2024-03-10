@@ -1,19 +1,22 @@
 <script lang="ts" setup>
 import routes from "~/lib/constants/routes";
 
-definePageMeta({ showTopHeader: true, name: "Register" });
+definePageMeta({ showTopHeader: true, name: "Reset Password" });
 
-const { onSubmit, formFields, showPassword, toggleShowPassword } =
-  useRegisterForm();
+const { onSubmit, formFields, toggleShowPassword, showPassword } =
+  useResetPasswordForm();
 </script>
 
 <template>
-  <form @click="onSubmit" class="flex flex-col gap-8">
+  <form
+    @click="onSubmit"
+    class="flex flex-col gap-5 h-[calc(100vh-60px)] justify-center"
+  >
+    <IconLock />
     <div class="flex flex-col gap-3 mt-10">
-      <h3 class="auth-header-text">Welcome to MonieTracka</h3>
+      <h3 class="auth-header-text">Set your password</h3>
       <p class="text-base leading-normal">
-        Complete the sign up to get started and get daily insights on your
-        spending 📊
+        Please create your new account password for MonieTracka
       </p>
     </div>
     <div class="flex flex-col gap-3">
@@ -34,7 +37,7 @@ const { onSubmit, formFields, showPassword, toggleShowPassword } =
           </FormControl>
           <div class="flex items-center justify-between">
             <FormMessage />
-            <div v-if="field.name == 'password'" class="ml-auto">
+            <div v-if="field.name == 'confirmPassword'" class="ml-auto">
               <Label
                 @click="toggleShowPassword"
                 class="text-xs"
@@ -47,9 +50,9 @@ const { onSubmit, formFields, showPassword, toggleShowPassword } =
         </FormItem>
       </FormField>
     </div>
-    <Button type="submit" class="w-full">Register</Button>
+    <Button type="submit" class="w-full">Continue</Button>
     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-      Have an account?
+      Remembered password?
       <NuxtLink
         :href="routes.login"
         class="font-medium text-primary-600 hover:underline dark:text-primary-500"

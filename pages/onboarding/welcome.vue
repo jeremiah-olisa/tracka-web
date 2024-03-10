@@ -22,11 +22,3 @@ const name = "JerryDePredator!";
     </div>
   </div>
 </template>
-
-<style>
-.onboarding-header-text {
-  @apply font-medium text-xl leading-8 text-[#240F51] text-center;
-  font-family: "Inter";
-  font-style: normal;
-}
-</style>

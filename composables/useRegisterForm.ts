@@ -11,7 +11,7 @@ export const registerFormValidationSchema = toTypedSchema(
     password: z
       .string()
       .min(8)
-      .max(12)
+      .max(30)
       .regex(
         STRONG_PASSWORD_REGEXP,
         "Your password must contain at least one Upper case, one lower case and a number e.g Passw0rd",

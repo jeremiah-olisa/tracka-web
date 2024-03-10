@@ -1,22 +1,21 @@
 <script setup lang="ts">
 import routes from "~/lib/constants/routes";
 
-definePageMeta({ name: "Welcome To MonieTracker - Email Sent" });
+definePageMeta({ name: "Reset password mail sent" });
 const email = "jeremiaholisa@test.com";
 const hasOpenedMail = ref(false);
 </script>
 
 <template>
+  <!-- 40px is the padding horizontal -->
   <div
-    class="flex flex-col gap-6 justify-center items-center h-[calc(100vh-40px)]"
+    class="flex flex-col gap-14 justify-center items-center h-[calc(100vh-40px)]"
   >
     <IconOpenMail />
-    <div class="onboarding-header-text">
-      We have sent an email verification link to your email
-    </div>
+    <div class="onboarding-header-text">Your email is on the way</div>
     <div class="onboarding-desc-text">
-      Check your email {{ email }} and click the link to verify your email
-      address
+      Check your email {{ email }} and follow the instructions to reset your
+      password
     </div>
     <div class="absolute bottom-5">
       <NuxtLink
