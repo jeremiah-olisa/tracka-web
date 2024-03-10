@@ -1,5 +1,5 @@
 <script setup lang="ts">
-definePageMeta({ layout: false });
+definePageMeta({ layout: false, name: "Onboard User" });
 </script>
 
 <template>

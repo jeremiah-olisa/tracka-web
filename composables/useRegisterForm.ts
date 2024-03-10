@@ -4,8 +4,9 @@ import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 import { STRONG_PASSWORD_REGEXP } from "~/lib/constants";
 
-export const loginFormValidationSchema = toTypedSchema(
+export const registerFormValidationSchema = toTypedSchema(
   z.object({
+    fullName: z.string().min(5).max(100),
     email: z.string().min(2).max(60).email(),
     password: z
       .string()
@@ -18,11 +19,17 @@ export const loginFormValidationSchema = toTypedSchema(
   }),
 );
 
-export const useLoginForm = () => {
+export const useRegisterForm = () => {
   const showPassword = ref(false);
 
   const formFields = computed(() => {
     return [
+      {
+        name: "fullName",
+        label: "Full Name",
+        placeholder: "John Doe",
+        type: "email",
+      },
       {
         name: "email",
         label: "Email",
@@ -43,13 +50,13 @@ export const useLoginForm = () => {
   };
 
   const form = useForm({
-    validationSchema: loginFormValidationSchema,
+    validationSchema: registerFormValidationSchema,
   });
 
   const onSubmit = form.handleSubmit((values) => {
     console.log("Form submitted!", values);
 
-    return navigateTo(routes.home, { replace: true });
+    return navigateTo(routes.welcome, { replace: true });
   });
 
   return { onSubmit, formFields, showPassword, toggleShowPassword };

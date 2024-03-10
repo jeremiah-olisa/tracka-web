@@ -1,5 +1,6 @@
 <template>
-  <div class="flex h-screen justify-center">
+  <Title>{{ $route.name }}</Title>
+  <div class="flex h-screen justify-center" :class="$route.meta.backgroundClass">
     <div class="app-container">
       <div class="flex flex-col p-5">
         <header

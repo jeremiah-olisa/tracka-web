@@ -1,4 +1,6 @@
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+definePageMeta({ name: "Home" });
+</script>
 
 <template>
   <div>Page: index</div>

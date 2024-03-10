@@ -1,18 +1,19 @@
 <script lang="ts" setup>
 import routes from "~/lib/constants/routes";
 
-definePageMeta({ showTopHeader: true, name: "Login" });
+definePageMeta({ showTopHeader: true, name: "Register" });
 
 const { onSubmit, formFields, showPassword, toggleShowPassword } =
-  useLoginForm();
+  useRegisterForm();
 </script>
 
 <template>
   <form @click="onSubmit" class="flex flex-col gap-8">
     <div class="flex flex-col gap-3 mt-10">
-      <h3 class="auth-header-text">Welcome back</h3>
+      <h3 class="auth-header-text">Welcome to MonieTracka</h3>
       <p class="text-base leading-normal">
-        Hey you're back, fill in your details to get back in
+        Complete the sign up to get started and get daily insights on your
+        spending 📊
       </p>
     </div>
     <div class="flex flex-col gap-3">
@@ -46,29 +47,13 @@ const { onSubmit, formFields, showPassword, toggleShowPassword } =
         </FormItem>
       </FormField>
     </div>
-    <div class="flex items-center justify-end">
-      <!-- <div class="flex items-center space-x-2">
-        <Checkbox id="rememberMe" />
-        <Label
-          for="rememberMe"
-          class="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-        >
-          Remember me
-        </Label>
-      </div> -->
-      <NuxtLink
-        :href="routes.forgotPassword"
-        class="text-sm font-medium text-primary-600 hover:underline border-pri dark:text-primary-500"
-        >Forgot password?</NuxtLink
-      >
-    </div>
-    <Button type="submit" class="w-full">Login</Button>
+    <Button type="submit" class="w-full">Register</Button>
     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-      Don’t have an account yet?
+      Have an account?
       <NuxtLink
-        :href="routes.register"
+        :href="routes.login"
         class="font-medium text-primary-600 hover:underline dark:text-primary-500"
-        >Sign up</NuxtLink
+        >Sign in</NuxtLink
       >
     </p>
   </form>

@@ -1,6 +1,7 @@
 declare module "#app" {
   interface PageMeta {
     pageTitle?: string;
+    backgroundClass?: string;
     showTopHeader?: boolean;
     showBottomNavigation?: boolean;
   }

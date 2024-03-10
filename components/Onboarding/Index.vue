@@ -3,6 +3,7 @@ import OnboardingIllustrationOne from "./Illustration/One.vue";
 import OnboardingIllustrationTwo from "./Illustration/Two.vue";
 import OnboardingIllustrationThree from "./Illustration/Three.vue";
 import { useLocalStorage } from "@vueuse/core";
+import routes from "~/lib/constants/routes";
 
 type Screens = keyof typeof onboardingContent;
 
@@ -53,7 +54,7 @@ const nextScreen = (screen?: number) => {
 
 const skip = () => {
   onboardedAt.value = Date.now();
-  navigateTo("/auth/login", { replace: true });
+  navigateTo(routes.register, { replace: true });
 };
 </script>
 
