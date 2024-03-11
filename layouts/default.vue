@@ -6,7 +6,7 @@ const menuItems = [
   { icon: Home, link: routes.home, name: "Home" },
   { icon: PieChart, name: "Budget" },
   { icon: BarChart2, name: 'Insights' },
-  { icon: User, name: "Settings" },
+  { icon: User, link: routes.login, name: "Settings" },
 ];
 </script>
 <template>
@@ -21,7 +21,7 @@ const menuItems = [
         v-if="$route.meta.showTopHeader"
       >
         <div>
-          <Button size="sm" class="rounded-full bg-white">
+          <Button @click="$router.back()" size="sm" class="rounded-full bg-white hover:bg-white">
             <svg
               width="9"
               height="14"
