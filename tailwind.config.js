@@ -11,6 +11,7 @@ module.exports = {
       padding: "2rem",
       screens: {
         "2xl": "1400px",
+        "xs": "640px",
       },
     },
     extend: {
@@ -22,6 +23,10 @@ module.exports = {
         background: "hsl(var(--background))",
         "primary-57": {
           DEFAULT: "hsl(var(--primary-57))",
+          foreground: "hsl(var(--foreground))",
+        },
+        "primary-55": {
+          DEFAULT: "hsl(var(--primary-55))",
           foreground: "hsl(var(--foreground))",
         },
         foreground: "hsl(var(--foreground))",
