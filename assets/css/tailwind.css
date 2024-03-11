@@ -83,7 +83,7 @@
 }
 
 .app-container {
-  @apply w-[380px] lg:w-[512px] md:w-[448px];
+  @apply w-[500px] lg:w-[512px] md:w-[448px];
 }
 
 .auth-header-text {
