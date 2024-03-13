@@ -5,7 +5,7 @@ import discount from "~/assets/icons/discount.svg";
 definePageMeta({
   name: "Home",
   showBottomNavigation: true,
-  backgroundClass: "bg-primary",
+  backgroundClass: "bg-primary text-primary-foreground",
 });
 const name = "JerryDePredator";
 
@@ -33,7 +33,7 @@ const expenses = [
     </div>
     <section class="text-white">
       <div
-        class="w-full doodle-img bg-[#210FA4] mb-4 rounded-3xl p-5 flex flex-col"
+        class="w-full doodle-img bg-primary-35  mb-4 rounded-3xl p-5 flex flex-col"
       >
         <div class="flex flex-col items-center mb-9">
           <div
@@ -67,12 +67,12 @@ const expenses = [
           </div>
         </div>
       </div>
-      <div class="flex p-4 bg-[#2816A7] rounded-2xl">
+      <div class="flex p-4 bg-primary-77-37 rounded-2xl">
         <div
-          class="relative w-10 h-10 bg-[#5844EE] flex items-center justify-center rounded-[0.625rem]"
+          class="relative w-10 h-10 bg-primary-60 flex items-center justify-center rounded-[0.625rem]"
         >
           <span
-            class="inline-block bg-[#FFAE58] h-3.5 w-3.5 rounded-full absolute"
+            class="inline-block bg-orange-400 h-3.5 w-3.5 -top-1 -right-1 rounded-full absolute"
           ></span>
           <img :src="discount" alt="" />
         </div>

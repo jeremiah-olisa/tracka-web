@@ -3,6 +3,7 @@ import routes from "~/lib/constants/routes";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 import { STRONG_PASSWORD_REGEXP } from "~/lib/constants";
+import type { IFormFieldInput } from "~/lib/types";
 
 export const registerFormValidationSchema = toTypedSchema(
   z.object({
@@ -22,7 +23,7 @@ export const registerFormValidationSchema = toTypedSchema(
 export const useRegisterForm = () => {
   const showPassword = ref(false);
 
-  const formFields = computed(() => {
+  const formFields = computed<IFormFieldInput[]>(() => {
     return [
       {
         name: "fullName",

@@ -21,6 +21,26 @@ module.exports = {
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
+        "primary-35": {
+          DEFAULT: "hsl(var(--primary-35))",
+          foreground: "hsl(var(--foreground))",
+        },
+        "primary-47": {
+          DEFAULT: "hsl(var(--primary-47))",
+          foreground: "hsl(var(--foreground))",
+        },
+        "primary-53": {
+          DEFAULT: "hsl(var(--primary-53))",
+          foreground: "hsl(var(--primary-53-foreground))",
+        },
+        "primary-77-37": {
+          DEFAULT: "hsl(var(--primary-77-37))",
+          foreground: "hsl(var(--foreground))",
+        },
+        "primary-60": {
+          DEFAULT: "hsl(var(--primary-60))",
+          foreground: "hsl(var(--foreground))",
+        },
         "primary-57": {
           DEFAULT: "hsl(var(--primary-57))",
           foreground: "hsl(var(--foreground))",

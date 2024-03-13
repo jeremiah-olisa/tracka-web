@@ -8,7 +8,7 @@ const { onSubmit, formFields, showPassword, toggleShowPassword } =
 </script>
 
 <template>
-  <form @click="onSubmit" class="flex flex-col gap-8">
+  <form @submit="onSubmit" class="flex flex-col gap-8">
     <div class="flex flex-col gap-3 mt-10">
       <h3 class="auth-header-text">Welcome back</h3>
       <p class="text-base leading-normal">

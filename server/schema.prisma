@@ -60,12 +60,14 @@ model UserAccounts {
 
 model Budget {
     id            Int             @id @default(autoincrement())
-    frequency     BudgetFrequency
+    frequency     BudgetFrequency @default(Custom)
     name          String
+    category      String
+    alert         Int?
     startDate     DateTime
     endDate       DateTime?
     userAccountId Int
-    total         Decimal
+    budgeted      Decimal
     spent         Decimal?
     budgetKey     String          @unique @default(cuid())
     createdAt     DateTime        @default(now())
@@ -93,4 +95,5 @@ enum BudgetFrequency {
     Weekly
     BiAnnually
     Quarterly
+    Custom
 }

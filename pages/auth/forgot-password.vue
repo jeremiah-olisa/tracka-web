@@ -7,7 +7,7 @@ const { onSubmit, formFields } = useForgotPasswordForm();
 </script>
 
 <template>
-  <form @click="onSubmit" class="flex flex-col gap-8">
+  <form @submit="onSubmit" class="flex flex-col gap-8">
     <div class="flex flex-col gap-3 mt-10">
       <h3 class="auth-header-text">
         Enter your email and we’ll send you a link to reset your password.

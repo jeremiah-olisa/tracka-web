@@ -10,4 +10,7 @@ export default {
   emailSent: "/onboarding/email-sent",
   emailVerified: "/onboarding/email-verified",
   home: "/",
+  budget: "/budget",
+  createBudget: "/budget/create",
+  budgets: (key: string) => `/budget/${key}`,
 };

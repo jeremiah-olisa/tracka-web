@@ -2,6 +2,7 @@ import { useForm } from "vee-validate";
 import routes from "~/lib/constants/routes";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
+import type { IFormFieldInput } from "~/lib/types";
 
 export const forgotPasswordFormValidationSchema = toTypedSchema(
   z.object({
@@ -10,7 +11,7 @@ export const forgotPasswordFormValidationSchema = toTypedSchema(
 );
 
 export const useForgotPasswordForm = () => {
-  const formFields = [
+  const formFields: IFormFieldInput[] = [
     {
       name: "email",
       label: "Email",
