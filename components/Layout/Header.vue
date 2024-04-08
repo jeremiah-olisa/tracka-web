@@ -1,7 +1,26 @@
+<script setup lang="ts">
+import { useRouter } from "vue-router";
+const router = useRouter();
+
+const handleBack = () => {
+  if (typeof router.currentRoute.value.meta.back == "function") {
+    // Call the custom back function
+    const back = router.currentRoute.value.meta.back as Function;
+    back();
+  } else {
+    // Default behavior: Go back using router
+    router.back();
+  }
+};
+</script>
 <template>
   <header class="flex items-center justify-center">
     <div>
-      <Button @click="$router.back()" size="icon" class="w-[32px] h-[32px] rounded-full back-btn">
+      <Button
+        @click="handleBack"
+        size="icon"
+        class="w-[32px] h-[32px] rounded-full back-btn"
+      >
         <svg
           width="9"
           height="14"

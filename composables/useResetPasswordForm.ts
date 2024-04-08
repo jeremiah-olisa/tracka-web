@@ -30,16 +30,22 @@ export const useResetPasswordForm = () => {
   const formFields = computed<IFormFieldInput[]>(() => {
     return [
       {
-        name: "password",
-        label: "Password",
-        placeholder: "Password",
-        type: showPassword.value ? "text" : "password",
+        key: "password",
+        input: {
+          name: "password",
+          label: "Password",
+          placeholder: "Password",
+          type: showPassword.value ? "text" : "password",
+        }
       },
       {
-        name: "confirmPassword",
-        label: "Confirm Password",
-        placeholder: "Confirm Password",
-        type: showPassword.value ? "text" : "password",
+        key: "confirmPassword",
+        input: {
+          name: "confirmPassword",
+          label: "Confirm Password",
+          placeholder: "Confirm Password",
+          type: showPassword.value ? "text" : "password",
+        }
       },
     ];
   });

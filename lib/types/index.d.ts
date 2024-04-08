@@ -1,4 +1,4 @@
-import type { InputTypeHTMLAttribute } from "vue";
+import type { InputTypeHTMLAttribute, VueConstructor } from "vue";
 
 declare module "#app" {
   interface PageMeta {
@@ -11,11 +11,23 @@ declare module "#app" {
 }
 
 export interface IFormFieldInput<T extends String = string> {
-  name: T;
-  label: string;
-  placeholder: string;
-  type: InputTypeHTMLAttribute;
-  component?: any; 
+  key: string,
+  input?: {
+    data?: string[];
+    name: T;
+    label: string;
+    placeholder: string;
+    type: InputTypeHTMLAttribute;
+  },
+  component?: VueConstructor;
+  componentProps?: Record<string, any>;
 }
-// It is always important to ensure you import/export something when augmenting a type
-export { };
+
+export interface IBankList {
+  name: string
+  slug: string
+  code: string
+  ussd: string
+  logo: string
+}
+

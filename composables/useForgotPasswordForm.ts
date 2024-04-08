@@ -13,10 +13,13 @@ export const forgotPasswordFormValidationSchema = toTypedSchema(
 export const useForgotPasswordForm = () => {
   const formFields: IFormFieldInput[] = [
     {
-      name: "email",
-      label: "Email",
-      placeholder: "johndoe@mail.com",
-      type: "email",
+      key: "email",
+      input: {
+        name: "email",
+        label: "Email",
+        placeholder: "johndoe@mail.com",
+        type: "email",
+      },
     },
   ];
 

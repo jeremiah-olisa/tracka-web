@@ -7,7 +7,7 @@ const { onSubmit, formFields } = useForgotPasswordForm();
 </script>
 
 <template>
-  <form @submit="onSubmit" class="flex flex-col gap-8">
+  <form @submit.prevent="onSubmit" class="flex flex-col gap-8">
     <div class="flex flex-col gap-3 mt-10">
       <h3 class="auth-header-text">
         Enter your email and we’ll send you a link to reset your password.
@@ -16,23 +16,11 @@ const { onSubmit, formFields } = useForgotPasswordForm();
     <div class="flex flex-col gap-3">
       <FormField
         v-for="field in formFields"
-        :key="field.name"
+        :key="field.key"
         v-slot="{ componentField }"
-        :name="field.name"
+        :name="field.key"
       >
-        <FormItem>
-          <FormLabel :for="field.name">{{ field.label }}</FormLabel>
-          <FormControl>
-            <Input
-              :type="field.type"
-              :placeholder="field.placeholder"
-              v-bind="componentField"
-            />
-          </FormControl>
-          <div class="flex items-center justify-between">
-            <FormMessage />
-          </div>
-        </FormItem>
+        <CustomFormWizard :field="field" :componentField="componentField" />
       </FormField>
     </div>
     <Button type="submit" class="w-full">Continue</Button>

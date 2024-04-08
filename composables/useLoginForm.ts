@@ -25,16 +25,22 @@ export const useLoginForm = () => {
   const formFields = computed<IFormFieldInput[]>(() => {
     return [
       {
-        name: "email",
-        label: "Email",
-        placeholder: "johndoe@mail.com",
-        type: "email",
+        key: "email",
+        input: {
+          name: "email",
+          label: "Email",
+          placeholder: "johndoe@mail.com",
+          type: "email",
+        },
       },
       {
-        name: "password",
-        label: "Password",
-        placeholder: "Password",
-        type: showPassword.value ? "text" : "password",
+        key: "password",
+        input: {
+          name: "password",
+          label: "Password",
+          placeholder: "Password",
+          type: showPassword.value ? "text" : "password",
+        },
       },
     ];
   });

@@ -22,22 +22,22 @@ const { onSubmit, formFields, toggleShowPassword, showPassword } =
     <div class="flex flex-col gap-3">
       <FormField
         v-for="field in formFields"
-        :key="field.name"
+        :key="field.key"
         v-slot="{ componentField }"
-        :name="field.name"
+        :name="field.key"
       >
-        <FormItem>
-          <FormLabel :for="field.name">{{ field.label }}</FormLabel>
+        <FormItem v-if="field.input">
+          <FormLabel :for="field.input.name">{{ field.input.label }}</FormLabel>
           <FormControl>
             <Input
-              :type="field.type"
-              :placeholder="field.placeholder"
+              :type="field.input.type"
+              :placeholder="field.input.placeholder"
               v-bind="componentField"
             />
           </FormControl>
           <div class="flex items-center justify-between">
             <FormMessage />
-            <div v-if="field.name == 'confirmPassword'" class="ml-auto">
+            <div v-if="field.input.name == 'confirmPassword'" class="ml-auto">
               <Label
                 @click="toggleShowPassword"
                 class="text-xs"

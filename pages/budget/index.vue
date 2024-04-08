@@ -45,7 +45,7 @@ const budgets: IBudget[] = [
     consumption: 0,
   },
 ];
-budgets.length = 0;
+// budgets.length = 0;
 </script>
 
 <template>
@@ -90,41 +90,14 @@ budgets.length = 0;
         </NuxtLink>
       </div>
       <div v-else class="flex flex-col items-center justify-center px-5 gap-4">
-        <div
+        <CustomBudgetInfoCard
           v-for="budget in budgets"
-          class="border rounded-2xl w-full bg-primary-55 p-4"
-        >
-          <div class="flex flex-col">
-            <p class="budget-name">{{ budget.name }}</p>
-            <div class="flex">
-              <img
-                src="/assets/images/confetti.png"
-                class="h-10 w-10 bg-[#FFEADD] p-2 rounded-full"
-              />
-              <div class="flex ml-2 flex-grow justify-between">
-                <div class="flex justify-center flex-col gap-2">
-                  <p class="budget-category">{{ budget.category ?? "Misc" }}</p>
-                  <p class="budget-limit">{{ budget.amountBudgeted }}</p>
-                </div>
-                <p class="budget-amount-spent">
-                  ₦ {{ budget.amountSpent.toLocaleString() }}
-                </p>
-              </div>
-            </div>
-
-            <Progress
-              class="mt-5 h-1 w-full"
-              :model-value="budget.consumption"
-              :max="100"
-              base-color="bg-[#3e6bc2]"
-              indicator-color="bg-[#32FC65]"
-            />
-
-            <div class="budget-remarks">
-              <p><span class="mr-2">😘</span> You are doing really great!</p>
-            </div>
-          </div>
-        </div>
+          :budgetName="budget.name"
+          :budgetCategory="budget.category"
+          :amountBudgeted="budget.amountBudgeted"
+          :amountSpent="budget.amountSpent"
+          :consumption="budget.consumption"
+        />
       </div>
     </ScrollArea>
   </div>
@@ -149,27 +122,8 @@ budgets.length = 0;
   @apply text-[#150B5B] text-opacity-75 font-['Inter'] font-medium text-xs leading-[160%] text-center w-8/12;
 }
 
-.budget-amount-spent {
-  @apply flex items-center text-[#21f46a] leading-4 text-[14px] font-bold;
-  letter-spacing: -0.5px;
-}
-.budget-name {
-  @apply leading-4 text-xs font-semibold mb-4;
-  letter-spacing: -0.008em;
-}
-.budget-category {
-  @apply leading-4 text-[14px] font-semibold;
-  letter-spacing: -0.4px;
-}
-.budget-limit {
-  @apply leading-4 text-xs font-normal text-opacity-80;
-  letter-spacing: -0.2px;
-}
 .budget-header {
   @apply leading-4 text-2xl font-bold text-[#150B5B];
   letter-spacing: -0.2px;
-}
-.budget-remarks {
-  @apply font-medium text-[11px] leading-[18px] mt-4;
 }
 </style>

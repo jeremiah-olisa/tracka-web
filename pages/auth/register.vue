@@ -8,7 +8,7 @@ const { onSubmit, formFields, showPassword, toggleShowPassword } =
 </script>
 
 <template>
-  <form @submit="onSubmit" class="flex flex-col gap-8">
+  <form @submit.prevent="onSubmit" class="flex flex-col gap-8">
     <div class="flex flex-col gap-3 mt-10">
       <h3 class="auth-header-text">Welcome to MonieTracka</h3>
       <p class="text-base leading-normal">
@@ -19,32 +19,16 @@ const { onSubmit, formFields, showPassword, toggleShowPassword } =
     <div class="flex flex-col gap-3">
       <FormField
         v-for="field in formFields"
-        :key="field.name"
+        :key="field.key"
         v-slot="{ componentField }"
-        :name="field.name"
+        :name="field.key"
       >
-        <FormItem>
-          <FormLabel :for="field.name">{{ field.label }}</FormLabel>
-          <FormControl>
-            <Input
-              :type="field.type"
-              :placeholder="field.placeholder"
-              v-bind="componentField"
-            />
-          </FormControl>
-          <div class="flex items-center justify-between">
-            <FormMessage />
-            <div v-if="field.name == 'password'" class="ml-auto">
-              <Label
-                @click="toggleShowPassword"
-                class="text-xs"
-                :class="{ 'text-red-400': !showPassword }"
-              >
-                {{ showPassword ? "Hide Password" : "Show Password" }}
-              </Label>
-            </div>
-          </div>
-        </FormItem>
+        <CustomFormWizard
+          :field="field"
+          :componentField="componentField"
+          :showPassword="showPassword"
+          :toggleShowPassword="toggleShowPassword"
+        />
       </FormField>
     </div>
     <Button type="submit" class="w-full">Register</Button>
