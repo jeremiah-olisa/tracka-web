@@ -1,12 +1,11 @@
 <script lang="ts" setup>
 import type { ComponentFieldBindingObject } from "vee-validate";
-import { useBankList } from "~/composables/useBankList";
 const { componentField } = defineProps<{
   componentField: ComponentFieldBindingObject<string>;
   value: string;
 }>();
 
-const { banks, getBankNameByCode } = useBankList();
+const { banks } = useBankList();
 </script>
 
 <template>

@@ -3,7 +3,7 @@ import routes from "~/lib/constants/routes";
 
 definePageMeta({ showTopHeader: true, name: "Register" });
 
-const { onSubmit, formFields, showPassword, toggleShowPassword } =
+const { onSubmit, formFields, showPassword, isLoading, toggleShowPassword } =
   useRegisterForm();
 </script>
 
@@ -31,7 +31,7 @@ const { onSubmit, formFields, showPassword, toggleShowPassword } =
         />
       </FormField>
     </div>
-    <Button type="submit" class="w-full">Register</Button>
+    <Button type="submit" :loading="isLoading" class="w-full">Register</Button>
     <p class="text-sm font-light text-gray-500 dark:text-gray-400">
       Have an account?
       <NuxtLink

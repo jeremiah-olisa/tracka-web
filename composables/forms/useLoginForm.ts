@@ -5,9 +5,8 @@ import * as z from "zod";
 import { STRONG_PASSWORD_REGEXP } from "~/lib/constants";
 import type { IFormFieldInput } from "~/lib/types";
 
-export const registerFormValidationSchema = toTypedSchema(
+export const loginFormValidationSchema = toTypedSchema(
   z.object({
-    fullName: z.string().min(5).max(100),
     email: z.string().min(2).max(60).email(),
     password: z
       .string()
@@ -20,20 +19,13 @@ export const registerFormValidationSchema = toTypedSchema(
   }),
 );
 
-export const useRegisterForm = () => {
+export const useLoginForm = () => {
   const showPassword = ref(false);
+  const { loginWithPassword, loginLoadingState: isLoading } = useAuthentication();
+
 
   const formFields = computed<IFormFieldInput[]>(() => {
     return [
-      {
-        key: "fullName",
-        input: {
-          name: "fullName",
-          label: "Full Name",
-          placeholder: "John Doe",
-          type: "email",
-        }
-      },
       {
         key: "email",
         input: {
@@ -60,13 +52,13 @@ export const useRegisterForm = () => {
   };
 
   const form = useForm({
-    validationSchema: registerFormValidationSchema,
+    validationSchema: loginFormValidationSchema,
   });
 
-  const onSubmit = form.handleSubmit((values) => {
-    console.log("Form submitted!", values);
+  const onSubmit = form.handleSubmit(async (values) => {
+    await loginWithPassword(values.email, values.password);
 
-    return navigateTo(routes.welcome, { replace: true });
+    return navigateTo(routes.home, { replace: true });
   });
 
   return { onSubmit, formFields, showPassword, toggleShowPassword };

@@ -7,7 +7,9 @@ definePageMeta({
   showBottomNavigation: true,
   backgroundClass: "bg-primary text-primary-foreground",
 });
-const name = "JerryDePredator";
+
+const { getUserName } = useAuthentication();
+const name = getUserName.value;
 
 const expenses = [
   { bank: "Total Budget", amount: 12000000 },
@@ -33,7 +35,7 @@ const expenses = [
     </div>
     <section class="text-white">
       <div
-        class="w-full doodle-img bg-primary-35  mb-4 rounded-3xl p-5 flex flex-col"
+        class="w-full doodle-img bg-primary-35 mb-4 rounded-3xl p-5 flex flex-col"
       >
         <div class="flex flex-col items-center mb-9">
           <div

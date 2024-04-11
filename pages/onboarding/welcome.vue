@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import { useAuthentication } from "~/composables/backend/useAuthentication";
 import routes from "~/lib/constants/routes";
 
 definePageMeta({ name: "Welcome To MonieTracker" });
-const name = "JerryDePredator!";
+const {
+  user: { value: user },
+} = useAuthentication();
+const { query } = useRoute();
 </script>
 
 <template>
@@ -12,7 +16,10 @@ const name = "JerryDePredator!";
   >
     <IconChecked />
     <div class="onboarding-header-text">
-      Hi! <span class="font-extrabold">{{ name }}</span>
+      Hi!
+      <span class="font-extrabold">{{
+        query.name ?? user?.user_metadata.fullName ?? user?.email
+      }}</span>
       <p>Welcome to MonieTracka</p>
     </div>
     <div class="absolute bottom-5">
