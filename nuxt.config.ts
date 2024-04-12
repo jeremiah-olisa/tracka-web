@@ -34,5 +34,8 @@ export default defineNuxtConfig({
       exclude: [`${routes.auth}/*`, `${routes.onboarding}/*`],
       cookieRedirect: false,
     }
+  },
+  runtimeConfig: {
+    public: { MONO_PK: process.env.NUXT_ENV_MONO_PK }
   }
 });

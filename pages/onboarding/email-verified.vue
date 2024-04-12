@@ -2,7 +2,7 @@
 import routes from "~/lib/constants/routes";
 
 definePageMeta({ name: "Welcome To MonieTracker - Email Verified" });
-const name = "JerryDePredator@test.com";
+const { query } = useRoute();
 </script>
 
 <template>
@@ -11,12 +11,13 @@ const name = "JerryDePredator@test.com";
   >
     <IconChecked />
     <div class="onboarding-header-text">
-      Hi! <span class="font-extrabold">{{ name }}</span>
-      <p>Your account has been verified</p>
+      Hi!
+      <span class="font-extrabold">{{ query.name }}</span>
+      <p>Your email account ({{ query.email }}) has been verified</p>
     </div>
 
     <div class="absolute bottom-5">
-      <NuxtLink :href="routes.home">
+      <NuxtLink :href="routes.login">
         <Button class="px-20 rounded-full">Start Tracking</Button>
       </NuxtLink>
     </div>

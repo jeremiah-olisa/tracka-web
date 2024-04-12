@@ -2,7 +2,8 @@
 import routes from "~/lib/constants/routes";
 
 definePageMeta({ name: "Welcome To MonieTracker - Email Sent" });
-const email = "jeremiaholisa@test.com";
+const { query } = useRoute();
+const email = query.email;
 const hasOpenedMail = ref(false);
 </script>
 

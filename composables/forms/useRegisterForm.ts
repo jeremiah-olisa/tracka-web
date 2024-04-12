@@ -83,7 +83,7 @@ export const useRegisterForm = () => {
   const onSubmit = form.handleSubmit(async (values) => {
     await registerWithPassword(values.email, values.password, values.phoneNumber, values.fullName);
 
-    return navigateTo({ path: routes.login, query: { email: values.email } }, { replace: true });
+    return navigateTo({ path: routes.emailSent, query: { email: values.email } }, { replace: true });
   });
 
   return { onSubmit, formFields, showPassword, toggleShowPassword, isLoading };

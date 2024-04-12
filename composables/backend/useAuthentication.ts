@@ -1,80 +1,186 @@
-import type { User, Session, WeakPassword } from '@supabase/gotrue-js/src/lib/types';
+import type {
+  User,
+  Session,
+  WeakPassword,
+} from "@supabase/gotrue-js/src/lib/types";
 import { useToast } from "~/components/ui/toast";
 import ToastAction from "~/components/ui/toast/ToastAction.vue";
 import routes from "~/lib/constants/routes";
+import type { Database } from "~/lib/types/database.types";
 
-type RegisterAuthResponse = { user: User | null; session: Session | null } | undefined;
-type LoginAuthResponse = {
-  user: User;
-  session: Session;
-  weakPassword?: WeakPassword | undefined;
-} | {
-  user: null;
-  session: null;
-  weakPassword?: null | undefined;
-} | undefined;
+type RegisterAuthResponse =
+  | { user: User | null; session: Session | null }
+  | undefined;
+type LoginAuthResponse =
+  | {
+      user: User;
+      session: Session;
+      weakPassword?: WeakPassword | undefined;
+    }
+  | {
+      user: null;
+      session: null;
+      weakPassword?: null | undefined;
+    }
+  | undefined;
 
 // NOTE: Do not use supabase directly in your component
 export const useAuthentication = () => {
-  const { auth } = useSupabaseClient();
-  const { toast } = useToast()
-  const window = useWindow()
-  const user = useSupabaseUser()
+  const supabase = useSupabaseClient<Database>();
+  const { toast } = useToast();
+  const window = useWindow();
+  const user = useSupabaseUser();
+  const pinIsSet = ref<boolean>(false);
+  const userId = computed(() => user.value?.id ?? "");
+  const handler = useAsyncErrorHandler();
+
   const loginLoadingState = ref(false);
   const registerLoadingState = ref(false);
   const signOutLoadingState = ref(false);
 
-  const loginWithPassword = async (email: string, password: string): Promise<LoginAuthResponse> => {
+  const loginWithPassword = async (
+    email: string,
+    password: string
+  ): Promise<LoginAuthResponse> => {
     const handler = useAsyncErrorHandler("Login Error", loginLoadingState);
 
-    const response = await handler(async () => {
-      const { data, error } = await auth.signInWithPassword({ password, email });
+    const response = await handler(
+      async () => {
+        const { data, error } = await supabase.auth.signInWithPassword({
+          password,
+          email,
+        });
 
-      if (error) throw error;
-      return data;
-    }, () => loginWithPassword(email, password));
-
+        if (error) throw error;
+        return data;
+      },
+      () => loginWithPassword(email, password)
+    );
 
     toast({
       title: "Login Successful",
-      variant: 'success',
-    })
+      variant: "success",
+    });
 
     return response;
-  }
-  const registerWithPassword = async (email: string, password: string, phone: string, fullName: string): Promise<RegisterAuthResponse> => {
-    const handler = useAsyncErrorHandler("Registeration Error", registerLoadingState);
+  };
 
-    const response = await handler(async () => {
-      const emailRedirectTo = new URL(`${routes.welcome}?name=${fullName}`, window.value.location.origin ?? 'https://tracka.vercel.app').toString();
-      const { data, error } = await auth.signUp({ password, email, phone, options: { data: { fullName }, emailRedirectTo } });
+  const registerWithPassword = async (
+    email: string,
+    password: string,
+    phone: string,
+    fullName: string
+  ): Promise<RegisterAuthResponse> => {
+    const handler = useAsyncErrorHandler(
+      "Registeration Error",
+      registerLoadingState
+    );
 
-      if (error) throw error;
+    const response = await handler(
+      async () => {
+        const emailRedirectTo = new URL(
+          `${routes.emailVerified}?name=${fullName}&email=${email}`,
+          window.value.location.origin ?? "https://tracka.vercel.app"
+        ).toString();
+        const { data, error } = await supabase.auth.signUp({
+          password,
+          email,
+          phone,
+          options: { data: { fullName }, emailRedirectTo },
+        });
 
-      return data;
-    }, () => registerWithPassword(email, password, phone, fullName));
+        if (error) throw error;
+
+        return data;
+      },
+      () => registerWithPassword(email, password, phone, fullName)
+    );
 
     toast({
       title: "Registration Successful",
-      variant: 'default',
-    })
+      description: "Please check your email to verify your email address",
+      variant: "success",
+    });
 
     return response;
-
-  }
+  };
 
   const signOut = async () => {
-    const handler = useAsyncErrorHandler("Registeration Error", signOutLoadingState);
+    const handler = useAsyncErrorHandler(
+      "Registeration Error",
+      signOutLoadingState
+    );
 
+    await handler(
+      async () => {
+        const { error } = await supabase.auth.signOut();
+        if (error) throw new Error(error.message, { cause: error.cause });
+      },
+      () => signOut()
+    );
+  };
+
+  const setUserPin = async (pin: string) => {
     await handler(async () => {
-      const { error } = await auth.signOut();
-      if (error) throw new Error(error.message, { cause: error.cause });
-    }, () => signOut());
-  }
+      const { error } = await supabase
+        .from("user_pins")
+        .insert({ userid: userId.value, pin });
+
+      if (error) throw error;
+      else pinIsSet.value = await userPinIsSet();
+    });
+  };
+
+  const changeUserPin = (oldPin: string, newPin: string) => {
+    // const oldPinEncrypted = `userId.${user.value?.id}-newPin.${newPin}`;
+    // const newPinEncrypted = `userId.${user.value?.id}-newPin.${oldPin}`;
+    // if (pin.value == oldPin) pin.value = newPinEncrypted;
+    // else console.error("Old pin is incorrect");
+  };
+
+  const userPinIsSet = async () => {
+    return await handler(async () => {
+      const { data, error } = await supabase
+        .from("user_pins")
+        .select("id", { count: "exact" })
+        .eq("userid", userId!.value)
+        .single();
+
+      if (error && error?.code != "PGRST116") throw error;
+
+      return !!data?.id;
+    });
+  };
 
   const getUserName = computed(() => {
-    return user?.value?.user_metadata?.fullName ?? user?.value?.email ?? 'Unknown user';
-  })
+    return (
+      user?.value?.user_metadata?.fullName ??
+      user?.value?.email ??
+      "Unknown user"
+    );
+  });
 
-  return { loginWithPassword, registerWithPassword, signOut, user, signOutLoadingState, loginLoadingState, registerLoadingState, getUserName };
-}
+  watch(userId, () => {
+    if (!userId.value) signOut();
+  });
+
+  onMounted(async () => {
+    pinIsSet.value = await userPinIsSet();
+  });
+
+  return {
+    loginWithPassword,
+    registerWithPassword,
+    signOut,
+    setUserPin,
+    changeUserPin,
+    userPinIsSet,
+    user,
+    signOutLoadingState,
+    loginLoadingState,
+    registerLoadingState,
+    getUserName,
+    pinIsSet,
+    userId,
+  };
+};

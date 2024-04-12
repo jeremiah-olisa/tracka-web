@@ -11,8 +11,10 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
     "format": "prettier --write .",
     "generate:erd": "npx prisma generate",
-    "generate:supabase": "npx supabase gen types typescript --project-id jaalpvmewopvczojgpct > database.types.ts",
-    "supabase": "npx supabase"
+    "supabase": "npx supabase",
+    "supabase:generate": "npx supabase gen types typescript --project-id jaalpvmewopvczojgpct > lib/types/database.types.ts",
+    "supabase:make-migration": "npx supabase migration new",
+    "supabase:migrate": "npx supabase db push"
   },
   "prisma": {
     "schema": "server/schema.prisma"
@@ -25,6 +27,7 @@
     "@vueuse/core": "^10.9.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
+    "crypto-js": "^4.2.0",
     "date-fns": "^3.6.0",
     "embla-carousel": "^8.0.0",
     "embla-carousel-vue": "^8.0.0",
@@ -45,8 +48,10 @@
     "@nuxtjs/google-fonts": "^3.1.3",
     "@nuxtjs/supabase": "^1.2.0",
     "@prisma/client": "^5.10.2",
+    "@types/crypto-js": "^4.2.2",
     "prettier": "^3.2.5",
     "prisma": "^5.10.2",
+    "prisma-dbml-generator": "^0.12.0",
     "prisma-erd-generator": "^1.11.2",
     "prisma-markdown": "^1.0.9",
     "typescript": "^5.4.2"

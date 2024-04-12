@@ -24,7 +24,7 @@ export const useForgotPasswordForm = () => {
   ];
 
   const form = useForm({
-    validationSchema: loginFormValidationSchema,
+    validationSchema: forgotPasswordFormValidationSchema,
   });
 
   const onSubmit = form.handleSubmit((values) => {

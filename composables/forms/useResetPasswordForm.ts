@@ -55,7 +55,7 @@ export const useResetPasswordForm = () => {
   };
 
   const form = useForm({
-    validationSchema: loginFormValidationSchema,
+    validationSchema: resetPasswordFormValidationSchema,
   });
 
   const onSubmit = form.handleSubmit((values) => {

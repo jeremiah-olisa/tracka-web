@@ -4,7 +4,7 @@ import * as z from "zod";
 import type { IFormFieldInput } from "~/lib/types";
 import CustomFormCreateBudgetDateField from "~/components/Custom/Form/CreateBudgetDateField.vue";
 import CustomFormCreateBudgetAccountField from "~/components/Custom/Form/CreateBudgetAccountField.vue";
-const now = new Date
+
 export type IBudgetFormFields = 'name' | 'date' | 'account' | 'budget' | 'alert';
 
 export const createBudgetFormValidationSchema: { schema: TypedSchema, fields: IFormFieldInput<IBudgetFormFields>[] }[] =
