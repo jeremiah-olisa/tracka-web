@@ -25,15 +25,15 @@ type LoginAuthResponse =
   | undefined;
 
 // NOTE: Do not use supabase directly in your component
-export const useAuthentication = () => {
-  const supabase = useSupabaseClient<Database>();
+export const useAuthentication = (allowAnonymous: boolean = false) => {
   const { toast } = useToast();
   const window = useWindow();
   const user = useSupabaseUser();
-  const pinIsSet = ref<boolean>(false);
-  const userId = computed(() => user.value?.id ?? "");
   const handler = useAsyncErrorHandler();
+  const supabase = useSupabaseClient<Database>();
+  const userId = computed(() => user.value?.id ?? "");
 
+  const pinIsSet = ref(false);
   const loginLoadingState = ref(false);
   const registerLoadingState = ref(false);
   const signOutLoadingState = ref(false);
@@ -42,8 +42,6 @@ export const useAuthentication = () => {
     email: string,
     password: string
   ): Promise<LoginAuthResponse> => {
-    const handler = useAsyncErrorHandler("Login Error", loginLoadingState);
-
     const response = await handler(
       async () => {
         const { data, error } = await supabase.auth.signInWithPassword({
@@ -54,6 +52,8 @@ export const useAuthentication = () => {
         if (error) throw error;
         return data;
       },
+      "Login Error",
+      loginLoadingState,
       () => loginWithPassword(email, password)
     );
 
@@ -71,11 +71,6 @@ export const useAuthentication = () => {
     phone: string,
     fullName: string
   ): Promise<RegisterAuthResponse> => {
-    const handler = useAsyncErrorHandler(
-      "Registeration Error",
-      registerLoadingState
-    );
-
     const response = await handler(
       async () => {
         const emailRedirectTo = new URL(
@@ -93,6 +88,8 @@ export const useAuthentication = () => {
 
         return data;
       },
+      "Registeration Error",
+      registerLoadingState,
       () => registerWithPassword(email, password, phone, fullName)
     );
 
@@ -106,16 +103,16 @@ export const useAuthentication = () => {
   };
 
   const signOut = async () => {
-    const handler = useAsyncErrorHandler(
-      "Registeration Error",
-      signOutLoadingState
-    );
-
     await handler(
       async () => {
         const { error } = await supabase.auth.signOut();
         if (error) throw new Error(error.message, { cause: error.cause });
+
+        pinIsSet.value = false;
+        navigateTo(routes.login, { replace: true });
       },
+      "Registeration Error",
+      signOutLoadingState,
       () => signOut()
     );
   };
@@ -161,7 +158,7 @@ export const useAuthentication = () => {
   });
 
   watch(userId, () => {
-    if (!userId.value) signOut();
+    if (!userId.value && !allowAnonymous) signOut();
   });
 
   onMounted(async () => {

@@ -15,7 +15,6 @@ export const setUserPinFormValidationSchema = toTypedSchema(
 export const useSetUserPinForm = () => {
   const isLoading = ref(false);
   const { setUserPin } = useAuthentication();
-  const handler = useAsyncErrorHandler();
 
   const form = useForm({
     validationSchema: setUserPinFormValidationSchema,

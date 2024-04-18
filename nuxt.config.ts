@@ -2,7 +2,13 @@ import routes from "./lib/constants/routes";
 
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  modules: ["@nuxtjs/tailwindcss", "shadcn-nuxt", "@nuxtjs/google-fonts", "@nuxtjs/supabase"],
+  modules: [
+    "@nuxtjs/tailwindcss",
+    "shadcn-nuxt",
+    "@nuxtjs/google-fonts",
+    "@nuxtjs/supabase",
+    "@hebilicious/vue-query-nuxt",
+  ],
   shadcn: {
     /**
      * Prefix for all the imported component
@@ -29,13 +35,13 @@ export default defineNuxtConfig({
   },
   supabase: {
     redirectOptions: {
-      login: '/auth/login',
-      callback: '/auth/confirm',
+      login: "/auth/login",
+      callback: "/auth/confirm",
       exclude: [`${routes.auth}/*`, `${routes.onboarding}/*`],
       cookieRedirect: false,
-    }
+    },
   },
   runtimeConfig: {
-    public: { MONO_PK: process.env.NUXT_ENV_MONO_PK }
-  }
+    public: { MONO_PK: process.env.NUXT_ENV_MONO_PK },
+  },
 });

@@ -1,6 +1,7 @@
 <script lang="ts" setup>
 import avatar from "~/assets/images/avatar.png";
 import discount from "~/assets/icons/discount.svg";
+import { ChevronRight } from "lucide-vue-next";
 
 definePageMeta({
   name: "Home",
@@ -35,8 +36,11 @@ const expenses = [
     </div>
     <section class="text-white">
       <div
-        class="w-full doodle-img bg-primary-35 mb-4 rounded-3xl p-5 flex flex-col"
+        class="w-full doodle-img bg-primary-35 mb-4 rounded-3xl p-5 flex flex-col relative"
       >
+        <div class="w-7 h-7 absolute right-5 top-5 bg-indigo-800 rounded-2xl flex justify-center items-center">
+          <ChevronRight :width="20" color="#978AF4" />
+        </div>
         <div class="flex flex-col items-center mb-9">
           <div
             class="flex items-center mb-3.5 justify-center w-14 h-14 rounded-full bg-[#BDD6FF]"

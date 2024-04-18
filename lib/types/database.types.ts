@@ -9,6 +9,148 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
+      budget_items: {
+        Row: {
+          budget: string
+          budgetId: number
+          budgetItemKey: string
+          category: string
+          createdAt: string
+          id: number
+          name: string
+          spent: number | null
+          total: number
+          updatedAt: string
+        }
+        Insert: {
+          budget: string
+          budgetId: number
+          budgetItemKey?: string
+          category: string
+          createdAt?: string
+          id?: number
+          name: string
+          spent?: number | null
+          total: number
+          updatedAt?: string
+        }
+        Update: {
+          budget?: string
+          budgetId?: number
+          budgetItemKey?: string
+          category?: string
+          createdAt?: string
+          id?: number
+          name?: string
+          spent?: number | null
+          total?: number
+          updatedAt?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "budget_items_budgetId_fkey"
+            columns: ["budgetId"]
+            isOneToOne: false
+            referencedRelation: "budgets"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      budgets: {
+        Row: {
+          alert: number | null
+          budgeted: number
+          budgetKey: string
+          category: string
+          createdAt: string
+          endDate: string | null
+          id: number
+          name: string
+          spent: number | null
+          startDate: string
+          updatedAt: string
+          userAccountId: number
+        }
+        Insert: {
+          alert?: number | null
+          budgeted: number
+          budgetKey?: string
+          category: string
+          createdAt?: string
+          endDate?: string | null
+          id?: number
+          name: string
+          spent?: number | null
+          startDate: string
+          updatedAt?: string
+          userAccountId: number
+        }
+        Update: {
+          alert?: number | null
+          budgeted?: number
+          budgetKey?: string
+          category?: string
+          createdAt?: string
+          endDate?: string | null
+          id?: number
+          name?: string
+          spent?: number | null
+          startDate?: string
+          updatedAt?: string
+          userAccountId?: number
+        }
+        Relationships: []
+      }
+      user_accounts: {
+        Row: {
+          accountKey: string
+          accountName: string
+          accountNumber: string
+          balance: number
+          bankName: string
+          createdAt: string
+          currency: string
+          id: number
+          meta: string
+          updatedAt: string
+          userId: string
+        }
+        Insert: {
+          accountKey?: string
+          accountName: string
+          accountNumber: string
+          balance: number
+          bankName: string
+          createdAt?: string
+          currency: string
+          id?: number
+          meta: string
+          updatedAt?: string
+          userId: string
+        }
+        Update: {
+          accountKey?: string
+          accountName?: string
+          accountNumber?: string
+          balance?: number
+          bankName?: string
+          createdAt?: string
+          currency?: string
+          id?: number
+          meta?: string
+          updatedAt?: string
+          userId?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "user_accounts_userId_fkey"
+            columns: ["userId"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_pins: {
         Row: {
           createdat: string

@@ -1,14 +1,29 @@
 import { useToast } from "~/components/ui/toast";
 import ToastAction from "~/components/ui/toast/ToastAction.vue";
+import { type Ref } from "vue";
 
-export const useAsyncErrorHandler = (
-  errorTitle?: string,
-  loadingState?: Ref<boolean>
-) => {
+export const useAsyncErrorHandler = () => {
   const { toast } = useToast();
 
-  const tryCatch = async <C = any, R = any>(
+  // Overload 1: Accepts async method without loading state and retry
+  const tryCatch: {
+    <C, R>(
+      callback: () => C,
+      errorTitle?: string,
+      loadingState?: Ref<boolean>,
+      retry?: () => R
+    ): C;
+
+    <C, R>(
+      callback: () => Promise<C>,
+      errorTitle?: string,
+      loadingState?: Ref<boolean>,
+      retry?: () => Promise<R>
+    ): Promise<C>;
+  } = async <C, R>(
     callback: () => Promise<C>,
+    errorTitle?: string,
+    loadingState?: Ref<boolean>,
     retry?: () => Promise<R>
   ) => {
     try {

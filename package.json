@@ -14,17 +14,21 @@
     "supabase": "npx supabase",
     "supabase:generate": "npx supabase gen types typescript --project-id jaalpvmewopvczojgpct > lib/types/database.types.ts",
     "supabase:make-migration": "npx supabase migration new",
-    "supabase:migrate": "npx supabase db push"
+    "supabase:migrate": "npx supabase db push",
+    "postsupabase:migrate": "yarn supabase:generate"
   },
   "prisma": {
     "schema": "server/schema.prisma"
   },
   "dependencies": {
+    "@hebilicious/vue-query-nuxt": "^0.3.0",
     "@nuxtjs/tailwindcss": "^6.11.4",
     "@popperjs/core": "^2.11.8",
     "@supabase/gotrue-js": "^2.62.2",
+    "@tanstack/vue-query": "^5.29.0",
     "@vee-validate/zod": "^4.12.6",
     "@vueuse/core": "^10.9.0",
+    "axios": "^1.6.8",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "crypto-js": "^4.2.0",
@@ -40,6 +44,7 @@
     "v-calendar": "^3.1.2",
     "vee-validate": "^4.12.6",
     "vue": "^3.4.19",
+    "vue-error-boundary": "^2.0.3",
     "vue-router": "^4.3.0",
     "zod": "^3.22.4"
   },
