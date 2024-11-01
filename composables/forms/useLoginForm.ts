@@ -23,7 +23,6 @@ export const useLoginForm = () => {
   const showPassword = ref(false);
   const { loginWithPassword, loginLoadingState: isLoading } = useAuthentication();
 
-
   const formFields = computed<IFormFieldInput[]>(() => {
     return [
       {
